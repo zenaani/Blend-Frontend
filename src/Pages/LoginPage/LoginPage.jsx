@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -7,8 +7,11 @@ import {
 } from "firebase/auth";
 import { auth } from "../../firebase-config";
 import axios from "axios";
+import { UserContext } from "../../Contexts/UserContext";
 
 const LoginPage = () => {
+  const { setUserId, userId } = useContext(UserContext);
+
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
 
@@ -56,6 +59,13 @@ const LoginPage = () => {
         loginPassword
       );
       console.log(user);
+
+      axios
+        .get(`http://localhost:8080/user/email/${loginEmail}`)
+        .then((data) => {
+          console.log(data.data.userId);
+          setUserId(data.data.userId);
+        });
     } catch (error) {
       console.log(error.message);
     }
@@ -130,6 +140,7 @@ const LoginPage = () => {
       <div className="m-10">
         <div>Use Logged in : {user?.email}</div>
         <button onClick={logout}>Sign out</button>
+        <div>Imported Successfully {userId}</div>
       </div>
     </div>
   );

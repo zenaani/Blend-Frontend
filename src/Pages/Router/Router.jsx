@@ -5,6 +5,8 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 import Profile from "../Profile/Profile";
 import LoginPage from "../LoginPage/LoginPage";
 import NewPost from "../NewPost/NewPost";
+import Search from "../Search/Search";
+import OtherProfile from "../Search/OtherProfile";
 
 const Router = () => {
   return (
@@ -16,9 +18,11 @@ const Router = () => {
         <div className="w-full">
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
-            <Route path="/username" element={<Profile />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/newPost" element={<NewPost />}></Route>
+            <Route path="/search" element={<Search />}></Route>
+            <Route path="/username/:uid" element={<OtherProfile />}></Route>
           </Routes>
         </div>
       </div>

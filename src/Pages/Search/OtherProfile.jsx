@@ -2,16 +2,16 @@ import React, { useState, useEffect, useContext } from "react";
 import ProfileUserDetails from "../../Components/Profile/ProfileUserDetails";
 import ReqUserPost from "../../Components/Profile/ReqUserPost";
 import axios from "axios";
-import { UserContext } from "../../Contexts/UserContext";
+import { useParams } from "react-router-dom";
 
-const Profile = () => {
+const OtherProfile = () => {
+  const { uid } = useParams();
   const [username, setUsername] = useState("");
   const [fullname, setFullName] = useState("");
   const [post, setPost] = useState([]);
-  const { setUserId, userId } = useContext(UserContext);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/user/${userId}`).then((data) => {
+    axios.get(`http://localhost:8080/user/${uid}`).then((data) => {
       console.log(data);
       setUsername(data.data.userName);
       setFullName(data.data.name);
@@ -31,4 +31,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default OtherProfile;

@@ -11,11 +11,13 @@ const Sidebar = () => {
   const handleTabClick = (title) => {
     setActiveTab(title);
     if (title == "Profile") {
-      navigate("/username");
+      navigate("/profile");
     } else if (title == "Home") {
       navigate("/");
     } else if (title == "Create") {
       navigate("/newPost");
+    } else if (title == "Search") {
+      navigate("/search");
     }
   };
 

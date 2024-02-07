@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineTable, AiOutlineUser } from "react-icons/ai";
 import { RiVideoAddLine } from "react-icons/ri";
 import { BiBookmark } from "react-icons/bi";
 import ReqUserPostCard from "./ReqUserPostCard";
+import axios from "axios";
 
-const ReqUserPost = () => {
+const ReqUserPost = ({ post }) => {
   const [activeTab, setActiveTab] = useState();
+
   const tabs = [
     {
       tab: "Post",
@@ -42,8 +44,10 @@ const ReqUserPost = () => {
       </div>
       <div>
         <div className="flex flex-wrap">
-          {[1, 1, 1, 1, 1, 1].map((item) => (
-            <ReqUserPostCard />
+          {post.map((item, i) => (
+            <div key={i}>
+              <ReqUserPostCard image={item?.image} />
+            </div>
           ))}
         </div>
       </div>

@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { storage } from "../../firebase-config";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import axios from "axios";
+import { UserContext } from "../../Contexts/UserContext";
 
 const NewPost = () => {
   const [image, setImage] = useState(null);
   const [caption, setCaption] = useState("");
 
   const [imageURL, setImageURL] = useState("");
+
+  const { setUserId, userId } = useContext(UserContext);
 
   const uploadImage = () => {
     if (image == null) return;
@@ -19,11 +22,10 @@ const NewPost = () => {
 
         try {
           axios
-            .post("http://localhost:8080/post", {
-              userId: "1",
+            .post(`http://localhost:8080/user/savePost?id=${userId}`, {
               image: imageURL,
               caption: caption,
-              timestamp: "Night O clock",
+              timestamp: "11 O clock",
             })
             .then((response) => {
               console.log(response);
@@ -32,7 +34,6 @@ const NewPost = () => {
           console.log(error.message);
         }
       });
-
       console.log("Image Posted");
     });
   };

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RiSettings2Fill } from "react-icons/ri";
+import axios from "axios";
 
-const ProfileUserDetails = () => {
+const ProfileUserDetails = ({ username, fullname }) => {
   return (
     <div className="py-10 w-full">
       <div className="flex items-center">
@@ -15,7 +16,7 @@ const ProfileUserDetails = () => {
 
         <div className=" space-y-3 text-md">
           <div className="flex gap-10 items-center">
-            <p>Username</p>
+            <p>{username}</p>
             <buttonp className="bg-gray-300 py-1 px-3 rounded-md">
               Edit Profile
             </buttonp>
@@ -36,7 +37,7 @@ const ProfileUserDetails = () => {
             </div>
           </div>
           <div>
-            <p className="font-semibold">Full Name</p>
+            <p className="font-semibold">{fullname}</p>
             <p className="font-thin text-sm">
               Ocean lover, wave chaser, saltwater soul 🌊
             </p>
